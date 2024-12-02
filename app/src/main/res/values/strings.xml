@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ArsApp</string>
+    <string name="my_card">Мои Карты</string>
+    <string name="partners">Партнеры</string>
+    <string name="options">Настройки</string>
+    <string name="my_cards">Мои карты</string>
+    <string name="search">Search</string>
+</resources>
