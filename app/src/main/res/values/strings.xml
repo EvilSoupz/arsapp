@@ -5,4 +5,10 @@
     <string name="options">Настройки</string>
     <string name="my_cards">Мои карты</string>
     <string name="search">Search</string>
+    <string name="back">Назад</string>
+    <string name="settings">Настройки</string>
+    <string name="dispaly_cards">Отображение карт</string>
+    <string name="one_column">Одна в ряд</string>
+    <string name="two_column">Две в ряд</string>
+    <string name="card_order">Порядок карт</string>
 </resources>

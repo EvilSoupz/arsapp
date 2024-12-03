@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.arsapp.navigation.ArsAppNavigationGraph
 import com.example.arsapp.navigation.Screens
 import com.example.arsapp.ui.appui.mycards.MyCardMainScreen
+import com.example.arsapp.ui.appui.settings.SettingsScreen
 import com.example.arsapp.ui.theme.ArsAppTheme
 
 @Preview
@@ -38,7 +39,7 @@ fun MainApp() {
                 navHostController = navController,
                 myCardContent = { MyCardMainScreen(modifier = Modifier.padding(paddingValues)) },
                 partnersContent = { /*TODO*/ },
-                settingsContent = { /*TODO*/ }
+                settingsContent = { SettingsScreen() }
             )
 
 
