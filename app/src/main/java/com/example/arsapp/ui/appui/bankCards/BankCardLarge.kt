@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.arsapp.viewmodels.fakeCard
 
 @Composable
 fun BankCardLarge(
@@ -157,107 +158,6 @@ fun BankCardLarge(
             }
         }
 
-
-//            Column(
-//                modifier = Modifier.fillMaxWidth()
-//
-//
-//            ) {
-//
-//                Row(
-//                    modifier = Modifier.fillMaxWidth()
-//                ) {
-//                    if (bankCard.cashBackItems.size > 0) {
-//                        CashBackItemLarge(
-//                            item = bankCard.cashBackItems[0],
-//                            modifier = Modifier.weight(1f)
-//
-//                        )
-//                    } else {
-//                        Spacer(
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-//
-//                    Spacer(modifier = Modifier.width(6.dp))
-//                    if (bankCard.cashBackItems.size > 1) {
-//                        CashBackItemLarge(
-//                            item = bankCard.cashBackItems[1]
-//
-//                        )
-//                    } else {
-//                        Spacer(
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-//                }
-//                Spacer(modifier = Modifier.height(8.dp))
-//                Row (
-//                    modifier = Modifier.fillMaxWidth()
-//                ){
-//
-//                    if (bankCard.cashBackItems.size > 2) {
-//                        CashBackItemLarge(
-//                            item = bankCard.cashBackItems[2]
-//
-//                        )
-//                    } else {
-//                        Spacer(
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-//
-//                    Spacer(modifier = Modifier.width(6.dp))
-//                    if (bankCard.cashBackItems.size > 3) {
-//                        CashBackItemLarge(
-//                            item = bankCard.cashBackItems[3]
-//
-//                        )
-//                    } else {
-//                        Spacer(
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-//
-//                }
-//                Spacer(modifier = Modifier.height(8.dp))
-//                Row(
-//                    modifier = Modifier.fillMaxWidth()
-//                ) {
-//
-//                    if (bankCard.cashBackItems.size > 4) {
-//                        CashBackItemLarge(
-//                            item = bankCard.cashBackItems[4]
-//
-//                        )
-//                    } else {
-//                        Spacer(
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-//
-//                    Spacer(modifier = Modifier.width(6.dp))
-//                    if (bankCard.cashBackItems.size > 5) {
-//                        CashBackItemLarge(
-//                            item = bankCard.cashBackItems[5]
-//
-//                        )
-//                    } else {
-//                        Spacer(
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-//
-//                }
-//
-//
-//            }
 
     }
 

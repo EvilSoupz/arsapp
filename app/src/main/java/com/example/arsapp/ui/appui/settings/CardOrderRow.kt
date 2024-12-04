@@ -23,10 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.arsapp.CardOrder
 import com.example.arsapp.R
 
 @Composable
-fun CardOrderRow() {
+fun CardOrderRow(
+    onOrderClick :(CardOrder)-> Unit
+
+) {
 
     var clickState by remember { mutableStateOf(false) }
 
@@ -78,6 +82,7 @@ fun CardOrderRow() {
                                 .fillMaxWidth()
                                 .clickable {
                                     clickState = !clickState
+                                    onOrderClick(state)
 
                                 },
                             horizontalArrangement = Arrangement.End
@@ -101,8 +106,3 @@ fun CardOrderRow() {
 //}
 
 
-enum class CardOrder(val text: String) {
-    Alphabet("По алфавиту"),
-    CashBachDecrease("Кэшбэ по убыванию"),
-    CashBachIncrease("Кэшбэ по возрастанию")
-}

@@ -24,7 +24,7 @@ import com.example.arsapp.ui.appui.bankCards.BankCardSmall
 fun CardsZone(
     modifier: Modifier = Modifier,
     cardList: List<BankCard>,
-    ifGridLayout: Boolean = false
+    ifGridLayout: Boolean
 
 ) {
 

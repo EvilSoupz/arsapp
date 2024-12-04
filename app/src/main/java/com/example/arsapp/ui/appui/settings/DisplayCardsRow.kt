@@ -25,10 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.arsapp.ArsAppSettings
 import com.example.arsapp.R
 
 @Composable
 fun DisplayCardsRow(
+    onOneInColumnClick:()->Unit,
+    onTwoInColumnClick:()->Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -79,6 +82,7 @@ fun DisplayCardsRow(
                         .clickable {
                             clickState = !clickState
                             textState = R.string.one_column
+                            onOneInColumnClick()
                         },
                     horizontalArrangement = Arrangement.End
                 ) {
@@ -90,6 +94,7 @@ fun DisplayCardsRow(
                         .clickable {
                             clickState = !clickState
                             textState = R.string.two_column
+                            onTwoInColumnClick()
                         },
                     horizontalArrangement = Arrangement.End
                 ) {
