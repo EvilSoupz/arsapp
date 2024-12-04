@@ -3,6 +3,7 @@ package com.example.arsapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,6 +15,7 @@ import com.example.arsapp.ui.appui.MainApp
 import com.example.arsapp.ui.theme.ArsAppTheme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(35)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
