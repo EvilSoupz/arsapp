@@ -12,10 +12,14 @@ fun ArsAppNavigationGraph (
     myCardContent : @Composable () -> Unit,
     partnersContent : @Composable () -> Unit,
     settingsContent : @Composable () -> Unit,
+    addCArdContent : @Composable ()->Unit
 ){
-    NavHost(navController = navHostController, startDestination = Screens.MyCard){
-        composable<Screens.MyCard> {
+    NavHost(navController = navHostController, startDestination = Screens.MyCard2.Main){
+        composable<Screens.MyCard2.Main> {
             myCardContent()
+        }
+        composable<Screens.MyCard2.AddCard> {
+            addCArdContent()
         }
         composable<Screens.Partners> {
             partnersContent()

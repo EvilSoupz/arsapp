@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.arsapp.ArsAppSettings
 import com.example.arsapp.navigation.ArsAppNavigationGraph
 import com.example.arsapp.navigation.Screens
+import com.example.arsapp.ui.appui.addCard.AddCardMainScreen
 import com.example.arsapp.ui.appui.mycards.MyCardMainScreen
 import com.example.arsapp.ui.appui.settings.SettingsScreen
 import com.example.arsapp.ui.theme.ArsAppTheme
@@ -36,7 +37,7 @@ fun MainApp() {
             bottomBar = {
 
                 BottomBar(
-                    onMyCardClick = { navController.navigate(Screens.MyCard) },
+                    onMyCardClick = { navController.navigate(Screens.MyCard2.Main) },
                     onPartnersClick = { navController.navigate(Screens.Partners) },
                     onOptionsClick = { navController.navigate(Screens.Settings) },
                 )
@@ -52,10 +53,17 @@ fun MainApp() {
                 myCardContent = {
                     MyCardMainScreen(
                         arsAppViewModel = arsAppViewModel,
+                        onAddCardButton = { navController.navigate(Screens.MyCard2.AddCard) },
                         modifier = Modifier.padding(paddingValues)
                     )
                 },
                 partnersContent = { /*TODO*/ },
+                addCArdContent = {
+                    AddCardMainScreen(
+                        onBackButton = { navController.navigateUp() },
+                        onSaveCardButton = { arsAppViewModel.addCard(it) }
+                    )
+                },
                 settingsContent = {
                     SettingsScreen(
                         arsAppViewModel,

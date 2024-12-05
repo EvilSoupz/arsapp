@@ -22,6 +22,7 @@ import com.example.arsapp.R
 @Composable
 fun SettingsTopBar(
     onBackButton: () -> Unit,
+    centerText : String = stringResource(R.string.settings),
     modifier: Modifier = Modifier
 ) {
     Box(modifier = Modifier.fillMaxWidth()){
@@ -43,7 +44,7 @@ fun SettingsTopBar(
 
         ) {
             Text(
-                text = stringResource(R.string.settings),
+                text = centerText,
                 fontSize = 17.sp
             )
         }

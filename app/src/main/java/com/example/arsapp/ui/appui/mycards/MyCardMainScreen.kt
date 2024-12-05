@@ -19,6 +19,7 @@ import com.example.arsapp.viewmodels.ArsAppViewModelFactory
 @Composable
 fun MyCardMainScreen(
     arsAppViewModel: ArsAppViewModel,
+    onAddCardButton : ()->Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -27,7 +28,7 @@ fun MyCardMainScreen(
     Column {
         MyCardTopBar(
             onOrderClick = {   arsAppViewModel.sortCardList(it) },
-            onAddCardButton = {}
+            onAddCardButton = onAddCardButton
         )
 
 
@@ -51,7 +52,7 @@ fun MyCardTopBarPreview() {
         val defoltSettings = ArsAppSettings()
         val arsAppViewModel: ArsAppViewModel =
             viewModel(factory = ArsAppViewModelFactory(defoltSettings))
-        MyCardMainScreen(arsAppViewModel)
+        MyCardMainScreen(arsAppViewModel, onAddCardButton = {})
 //        MyCardMainScreen()
     }
 }

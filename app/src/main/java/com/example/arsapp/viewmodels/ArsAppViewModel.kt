@@ -28,7 +28,9 @@ class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() 
 
 
 
-
+    fun addCard(bankCard: BankCard){
+        fakeCardList.add(bankCard)
+    }
     fun sortCardList(order: CardOrder){
 //        arsAppSettings.changeCardOrder(order)
         _currentSettings.value.changeCardOrder(order)

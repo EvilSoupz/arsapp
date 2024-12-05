@@ -11,4 +11,14 @@ sealed interface Screens {
      @Serializable
      data object Settings : Screens
 
+
+     @Serializable
+     sealed interface MyCard2 : Screens
+     {
+          @Serializable
+          data object Main : MyCard2
+          @Serializable
+          data object AddCard : MyCard2
+     }
+
 }

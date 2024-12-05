@@ -42,7 +42,8 @@ fun SettingsScreen(
         ) {
             DisplayCardsRow(
                 onOneInColumnClick = { arsAppViewModel.changeLayoutToOneColumn() },
-                onTwoInColumnClick = { arsAppViewModel.changeLayoutToTwoColumn() }
+                onTwoInColumnClick = { arsAppViewModel.changeLayoutToTwoColumn() },
+                isGridLayou = currentSettings.value.isGridLayout
 
             )
             Spacer(modifier = Modifier.height(40.dp))

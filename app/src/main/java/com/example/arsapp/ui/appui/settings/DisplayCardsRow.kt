@@ -1,5 +1,6 @@
 package com.example.arsapp.ui.appui.settings
 
+import android.widget.GridLayout
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,11 +33,21 @@ import com.example.arsapp.R
 fun DisplayCardsRow(
     onOneInColumnClick:()->Unit,
     onTwoInColumnClick:()->Unit,
+    isGridLayou : Boolean,
+
     modifier: Modifier = Modifier
 ) {
 
     var clickState by remember { mutableStateOf(false) }
-    var textState by remember { mutableIntStateOf(R.string.one_column) }
+    var textState by remember { mutableIntStateOf( R.string.one_column) }
+
+    if(isGridLayou){
+        textState = R.string.two_column
+    }
+    else{
+        textState = R.string.one_column
+    }
+
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier

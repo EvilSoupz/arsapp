@@ -11,4 +11,7 @@
     <string name="one_column">Одна в ряд</string>
     <string name="two_column">Две в ряд</string>
     <string name="card_order">Порядок карт</string>
+    <string name="add_card">Добавление Карты</string>
+    <string name="card_name">Название карты</string>
+    <string name="save_card">Сохранить карту</string>
 </resources>
