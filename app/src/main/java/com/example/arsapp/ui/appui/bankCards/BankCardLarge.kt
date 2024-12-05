@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.arsapp.idk.BankCard
 import com.example.arsapp.viewmodels.fakeCard
 
 @Composable
@@ -58,7 +59,7 @@ fun BankCardLarge(
                     )
                     Text(
                         fontSize = 16.sp,
-                        text = bankCard.cardType
+                        text = bankCard.cardName
                     )
                 }
             }

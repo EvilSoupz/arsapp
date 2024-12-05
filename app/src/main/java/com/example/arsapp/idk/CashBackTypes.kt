@@ -1,4 +1,4 @@
-package com.example.arsapp.ui.appui.mycards
+package com.example.arsapp.idk
 
 class CashBackType(
     val name: String,

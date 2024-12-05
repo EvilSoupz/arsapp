@@ -1,6 +1,5 @@
 package com.example.arsapp.ui.appui.mycards
 
-import android.widget.GridLayout
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.arsapp.ui.appui.bankCards.BankCard
+import com.example.arsapp.idk.BankCard
 import com.example.arsapp.ui.appui.bankCards.BankCardLarge
 import com.example.arsapp.ui.appui.bankCards.BankCardSmall
 

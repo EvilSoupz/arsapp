@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,16 +42,21 @@ fun BottomBar(
     Column(modifier = Modifier
         .fillMaxWidth()
         .background(color = Color.DarkGray)) {   ///TODO цвеет
-        Spacer(modifier = Modifier
-            .fillMaxWidth()
-            .drawBehind {
-                drawLine(
-                    color = Color.Gray,
-                    start = Offset(0f, size.height),
-                    end = Offset(size.width, size.height),
-                    strokeWidth = 1f
-                )
-            })
+//        Spacer(modifier = Modifier
+//            .fillMaxWidth()
+//            .drawBehind {
+//                drawLine(
+//                    color = Color.Gray,
+//                    start = Offset(0f, size.height),
+//                    end = Offset(size.width, size.height),
+//                    strokeWidth = 1f
+//                )
+//            })
+//
+        Divider(
+            color = Color.Gray,
+            thickness = 1.dp
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()

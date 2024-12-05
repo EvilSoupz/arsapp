@@ -2,17 +2,14 @@ package com.example.arsapp
 
 enum class CardOrder(val text: String) {
     Alphabet("По алфавиту"),
-    CashBachDecrease("Кэшбэ по убыванию"),
-    CashBachIncrease("Кэшбэ по возрастанию")
+    CashBachDecrease("Кэшбэк по убыванию"),
+    CashBachIncrease("Кэшбэк по возрастанию")
 }
 
 data class Notification(
     val name : String,
     var isActive: Boolean=false
-) {
-
-
-}
+)
 
 class ArsAppSettings {
     private var cardOrder: CardOrder = CardOrder.Alphabet

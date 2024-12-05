@@ -51,7 +51,7 @@ fun SettingsScreen(
             )
             Spacer(modifier = Modifier.height(40.dp))
             NotificationRow(
-                currentSettings.value.notificationList,   // почему не происходит рекомпозиция
+                currentSettings.value.notificationList,
                 onNotificationChange = { arsAppViewModel.changeNotificationState(it)   }
             )
             Spacer(modifier = Modifier.height(40.dp))

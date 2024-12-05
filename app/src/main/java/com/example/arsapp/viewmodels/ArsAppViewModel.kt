@@ -7,8 +7,8 @@ import com.example.arsapp.ArsAppSettings
 import com.example.arsapp.CardOrder
 import com.example.arsapp.Notification
 import com.example.arsapp.R
-import com.example.arsapp.ui.appui.bankCards.BankCard
-import com.example.arsapp.ui.appui.bankCards.CashBackItem
+import com.example.arsapp.idk.BankCard
+import com.example.arsapp.idk.CashBackItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -69,7 +69,7 @@ class ArsAppViewModelFactory(private val arsAppSettings: ArsAppSettings) : ViewM
 val fakeCard = BankCard(
     bankImage = R.drawable.ic_launcher_foreground,
     bankName = "BankName",
-    cardType = "CardType",
+    cardName = "CardType",
     cashBackItems = listOf(
         CashBackItem(
             icon = R.drawable.ic_launcher_foreground,
