@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.arsapp.R
 import com.example.arsapp.idk.BankCard
 import com.example.arsapp.idk.CashBackItem
+import com.example.arsapp.idk.CashBackTypes2
 import com.example.arsapp.ui.appui.settings.SettingsTopBar
 
 @Composable
@@ -68,13 +69,14 @@ fun AddCardMainScreen(
                             bankImage = R.drawable.settings,
                             cashBackItems = listOf(
                                 CashBackItem(
-                                    R.drawable.settings,
-                                    name = " add name",
-                                    quantity = 99
+
+                                    quantity = 99,
+                                    type = CashBackTypes2.Entertainment
                                 )
                             )
                         )
                     )
+                    onBackButton()
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(10.dp)

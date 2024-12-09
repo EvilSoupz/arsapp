@@ -7,11 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.arsapp.ui.theme.ArsAppTheme
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.arsapp.ArsAppSettings
-import com.example.arsapp.idk.fakeCashBackTypeList
+import com.example.arsapp.ui.theme.ArsAppTheme
 import com.example.arsapp.viewmodels.ArsAppViewModel
 import com.example.arsapp.viewmodels.ArsAppViewModelFactory
 
@@ -34,7 +33,11 @@ fun MyCardMainScreen(
 
         MyCardSearchRow()
         Spacer(modifier = Modifier.height(10.dp))
-        MyCardCashBackRow(cashBackTypesList = fakeCashBackTypeList, onItemClicked = {})
+        MyCardCashBackRow(
+            onItemClicked = { arsAppViewModel.changeSelectedCashBackType(it)  },
+            selectedType = currentSettings.value.selectedCashBackType
+
+        )
         Spacer(modifier = Modifier.height(10.dp))
         CardsZone(
             ifGridLayout = currentSettings.value.isGridLayout,

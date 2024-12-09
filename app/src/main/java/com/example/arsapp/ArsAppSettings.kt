@@ -1,33 +1,26 @@
 package com.example.arsapp
 
-enum class CardOrder(val text: String) {
-    Alphabet("По алфавиту"),
-    CashBachDecrease("Кэшбэк по убыванию"),
-    CashBachIncrease("Кэшбэк по возрастанию")
-}
+import com.example.arsapp.idk.CardOrder
+import com.example.arsapp.idk.CashBackTypes2
 
 data class Notification(
     val name : String,
     var isActive: Boolean=false
 )
 
-class ArsAppSettings {
-    private var cardOrder: CardOrder = CardOrder.Alphabet
-    var isGridLayout: Boolean = false
-        private set
-    val notificationList = mutableListOf(
+data class ArsAppSettings(
+    private var cardOrder: CardOrder = CardOrder.Alphabet,
+    var isGridLayout: Boolean = false,
+
+    val notificationList: MutableList<Notification> = mutableListOf(
         Notification("Обновления Кэшбэка"),
         Notification("Новые предложения"),
         Notification("Рекомендации",true),
-    )
-    fun changeLayoutToOneColumn(){
-        isGridLayout = false
-    }fun changeLayoutToTwoColumn(){
-        isGridLayout = true
-    }
-    fun changeCardOrder (order: CardOrder){
-        cardOrder=order
-    }
+    ),
+    var selectedCashBackType: CashBackTypes2 = CashBackTypes2.All
+
+) {
+
     fun changeNotificationState ( notification: Notification){
         notificationList.replaceAll{
             if(it==notification){

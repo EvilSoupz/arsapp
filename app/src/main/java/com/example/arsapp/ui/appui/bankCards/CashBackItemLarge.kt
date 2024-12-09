@@ -44,11 +44,11 @@ fun CashBackItemLarge(
                     .width(16.dp)
                     .height(14.dp),
                 contentScale = ContentScale.Crop,
-                painter = painterResource(id = item.icon),
+                painter = painterResource(id = item.type.icon),
                 contentDescription = ""
             )
             Spacer(modifier = Modifier.width(5.dp))
-            Text(text = item.name)
+            Text(text = item.type.typeName)
             Text(
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,

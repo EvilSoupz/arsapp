@@ -9,7 +9,6 @@ class BankCard(
 
 
 class CashBackItem(
-    val icon: Int,
-    val name: String,
-    val quantity: Int
+    val quantity: Int,
+    val type: CashBackTypes2
 )

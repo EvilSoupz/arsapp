@@ -4,22 +4,22 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.arsapp.ArsAppSettings
-import com.example.arsapp.CardOrder
 import com.example.arsapp.Notification
 import com.example.arsapp.R
 import com.example.arsapp.idk.BankCard
+import com.example.arsapp.idk.CardOrder
 import com.example.arsapp.idk.CashBackItem
+import com.example.arsapp.idk.CashBackTypes2
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 
 class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() {
 
 
     private val _currentSettings = MutableStateFlow<ArsAppSettings>(arsAppSettings)
-    val currentSettings =_currentSettings.asStateFlow()
-
-
+    val currentSettings = _currentSettings.asStateFlow()
 
 
     val fakeCardList = mutableListOf(
@@ -27,40 +27,72 @@ class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() 
     )
 
 
-
-    fun addCard(bankCard: BankCard){
+    fun addCard(bankCard: BankCard) {
         fakeCardList.add(bankCard)
     }
-    fun sortCardList(order: CardOrder){
-//        arsAppSettings.changeCardOrder(order)
-        _currentSettings.value.changeCardOrder(order)
+
+    fun sortCardList(order: CardOrder) {
+
+//        _currentSettings.value.changeCardOrder(order)
+
+
+        _currentSettings.update {
+            it.copy(
+                cardOrder = order
+            )
+        }
         //TODO sort Card List
 
     }
+
     @RequiresApi(35)
-    fun resetCardList(){
-        while (fakeCardList.size>0){
+    fun resetCardList() {
+        while (fakeCardList.size > 0) {
             fakeCardList.removeLast()
         }
     }
 
+    fun changeSelectedCashBackType( type: CashBackTypes2){
+//        _currentSettings.value.changeSelectedCashBackType(type)
+        _currentSettings.update {
+            it.copy(
+                selectedCashBackType = type
+            )
+        }
+
+
+    }
+
     fun changeLayoutToOneColumn() {
-       _currentSettings.value.changeLayoutToOneColumn()
+//        _currentSettings.value.changeLayoutToOneColumn()
+        _currentSettings.update {
+            it.copy(
+                isGridLayout = false
+            )
+        }
+
+
     }
 
     fun changeLayoutToTwoColumn() {
-        _currentSettings.value.changeLayoutToTwoColumn()
+//        _currentSettings.value.changeLayoutToTwoColumn()
+        _currentSettings.update {
+            it.copy(
+                isGridLayout = true
+            )
+        }
     }
 
-    fun changeNotificationState(it: Notification) {
-        _currentSettings.value.changeNotificationState(it)
+    fun changeNotificationState(notification: Notification) {
+        _currentSettings.value.changeNotificationState(notification)
 
     }
 
 
 }
 
-class ArsAppViewModelFactory(private val arsAppSettings: ArsAppSettings) : ViewModelProvider.Factory {
+class ArsAppViewModelFactory(private val arsAppSettings: ArsAppSettings) :
+    ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ArsAppViewModel(arsAppSettings) as T
@@ -74,32 +106,32 @@ val fakeCard = BankCard(
     cardName = "CardType",
     cashBackItems = listOf(
         CashBackItem(
-            icon = R.drawable.ic_launcher_foreground,
-            name = "CashBack",
+
+            type = CashBackTypes2.Food,
             quantity = 1
         ),
         CashBackItem(
-            icon = R.drawable.ic_launcher_foreground,
-            name = "CashBack",
+
+            type = CashBackTypes2.Fuel,
             quantity = 2
         ),
         CashBackItem(
-            icon = R.drawable.ic_launcher_foreground,
-            name = "CashBack",
+
+            type = CashBackTypes2.Health,
             quantity = 3
         ),
         CashBackItem(
-            icon = R.drawable.ic_launcher_foreground,
-            name = "CashBack",
+
+            type = CashBackTypes2.Entertainment,
             quantity = 4
         ),
-        CashBackItem(
-            icon = R.drawable.ic_launcher_foreground,
-            name = "CashBack",
-            quantity = 5
-        ),
 //        CashBackItem(
-//            icon = R.drawable.ic_launcher_foreground,
+//
+//            type = CashBackTypes2.Food,
+//            quantity = 5
+//        ),
+//        CashBackItem(
+//
 //            name = "CashBackItem",
 //            quantity = 6
 //        ),

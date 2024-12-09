@@ -41,7 +41,7 @@ fun CashBackItemSmall(
                     .width(16.dp)
                     .height(14.dp),
                 contentScale = ContentScale.Crop,
-                painter = painterResource(id = item.icon),
+                painter = painterResource(id = item.type.icon),
                 contentDescription = ""
             )
             Spacer(modifier = Modifier.width(2.dp))
