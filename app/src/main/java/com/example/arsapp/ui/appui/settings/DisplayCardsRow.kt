@@ -1,6 +1,5 @@
 package com.example.arsapp.ui.appui.settings
 
-import android.widget.GridLayout
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
@@ -26,33 +24,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.arsapp.ArsAppSettings
 import com.example.arsapp.R
 
 @Composable
 fun DisplayCardsRow(
-    onOneInColumnClick:()->Unit,
-    onTwoInColumnClick:()->Unit,
-    isGridLayou : Boolean,
-
+    onOneInColumnClick: () -> Unit,
+    onTwoInColumnClick: () -> Unit,
+    isGridLayout: Boolean,
     modifier: Modifier = Modifier
 ) {
-
     var clickState by remember { mutableStateOf(false) }
-    var textState by remember { mutableIntStateOf( R.string.one_column) }
-
-    if(isGridLayou){
+    var textState by remember { mutableIntStateOf(R.string.one_column) }
+    if (isGridLayout) {
         textState = R.string.two_column
-    }
-    else{
+    } else {
         textState = R.string.one_column
     }
-
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-
     ) {
         Column(
             modifier = Modifier
@@ -75,16 +66,15 @@ fun DisplayCardsRow(
                 Row {
                     Text(text = stringResource(id = textState))
 
-                    if (clickState){
+                    if (clickState) {
                         Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
+                    } else {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowDown,
+                            contentDescription = null
+                        )
                     }
-                    else{
-                        Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = null)
-                    }
-
                 }
-
-
             }
             if (clickState) {
                 Row(
@@ -113,7 +103,5 @@ fun DisplayCardsRow(
                 }
             }
         }
-
     }
-
 }

@@ -19,22 +19,4 @@ data class ArsAppSettings(
     ),
     var selectedCashBackType: CashBackTypes2 = CashBackTypes2.All
 
-) {
-
-    fun changeNotificationState ( notification: Notification){
-        notificationList.replaceAll{
-            if(it==notification){
-
-                it.copy(isActive = !it.isActive)
-            }
-            else{
-
-                it
-            }
-        }
-
-
-    }
-
-
-}
+)

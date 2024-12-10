@@ -32,10 +32,6 @@ class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() 
     }
 
     fun sortCardList(order: CardOrder) {
-
-//        _currentSettings.value.changeCardOrder(order)
-
-
         _currentSettings.update {
             it.copy(
                 cardOrder = order
@@ -52,8 +48,8 @@ class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() 
         }
     }
 
-    fun changeSelectedCashBackType( type: CashBackTypes2){
-//        _currentSettings.value.changeSelectedCashBackType(type)
+    fun changeSelectedCashBackType(type: CashBackTypes2) {
+
         _currentSettings.update {
             it.copy(
                 selectedCashBackType = type
@@ -64,18 +60,14 @@ class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() 
     }
 
     fun changeLayoutToOneColumn() {
-//        _currentSettings.value.changeLayoutToOneColumn()
         _currentSettings.update {
             it.copy(
                 isGridLayout = false
             )
         }
-
-
     }
 
     fun changeLayoutToTwoColumn() {
-//        _currentSettings.value.changeLayoutToTwoColumn()
         _currentSettings.update {
             it.copy(
                 isGridLayout = true
@@ -84,21 +76,30 @@ class ArsAppViewModel(private val arsAppSettings: ArsAppSettings) : ViewModel() 
     }
 
     fun changeNotificationState(notification: Notification) {
-        _currentSettings.value.changeNotificationState(notification)
+//        _currentSettings.value.changeNotificationState(notification)
 
+        val newList = _currentSettings.value.notificationList.apply {
+            replaceAll {
+                if (it == notification) {
+
+                    it.copy(isActive = !it.isActive)
+                } else {
+                    it
+                }
+            }
+        }
+        _currentSettings.update { settings ->
+            settings.copy(notificationList = newList)
+        }
     }
-
-
 }
 
 class ArsAppViewModelFactory(private val arsAppSettings: ArsAppSettings) :
     ViewModelProvider.Factory {
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ArsAppViewModel(arsAppSettings) as T
     }
 }
-
 
 val fakeCard = BankCard(
     bankImage = R.drawable.ic_launcher_foreground,

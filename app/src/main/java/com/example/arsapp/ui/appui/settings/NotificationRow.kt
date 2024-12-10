@@ -21,14 +21,9 @@ import com.example.arsapp.Notification
 
 @Composable
 fun NotificationRow(
-    notificationsList : List<Notification>,
-    onNotificationChange : (Notification)->Unit
+    notificationsList: List<Notification>,
+    onNotificationChange: (Notification) -> Unit
 ) {
-
-//    var cashBackUpdate by remember{ mutableStateOf(false) }
-//    var newOffers by remember{ mutableStateOf(false) }
-//    var recomendations by remember{ mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,14 +31,9 @@ fun NotificationRow(
         Text(text = "Уведомления")
         Card(
             shape = RoundedCornerShape(10.dp),
-
-
-            ) {
-
-
-            for (notification in notificationsList){
+        ) {
+            for (notification in notificationsList) {
                 var checkState by remember { mutableStateOf(notification.isActive) }
-
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
@@ -52,36 +42,13 @@ fun NotificationRow(
                         .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
                 ) {
                     Text(text = notification.name)
-//                    Text(text = notification.isActive.toString())
                     Switch(checked = checkState, onCheckedChange = {
-                        checkState=it
-                        onNotificationChange(notification) }
-
+                        checkState = it
+                        onNotificationChange(notification)
+                    }
                     )
                 }
             }
-
-//            Row(
-//                horizontalArrangement = Arrangement.SpaceBetween,
-//                verticalAlignment = Alignment.CenterVertically,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
-//            ) {
-//                Text(text = "Новые предложения")
-//                Switch(checked = newOffers , onCheckedChange = { newOffers= !newOffers} )
-//            }
-//            Row(
-//                horizontalArrangement = Arrangement.SpaceBetween,
-//                verticalAlignment = Alignment.CenterVertically,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
-//            ) {
-//                Text(text = "Рекомендации")
-//                Switch(checked = recomendations , onCheckedChange = { recomendations= !recomendations} )
-//            }
         }
     }
-    
 }
