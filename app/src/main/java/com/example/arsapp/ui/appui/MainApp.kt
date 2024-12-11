@@ -4,11 +4,9 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavDirections
 import androidx.navigation.compose.rememberNavController
 import com.example.arsapp.ArsAppSettings
 import com.example.arsapp.navigation.ArsAppNavigationGraph
