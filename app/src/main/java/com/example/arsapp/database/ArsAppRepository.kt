@@ -10,7 +10,7 @@ interface ArsAppRepository {
 
     suspend fun insertCard(bankCard: CardWithCashbackDB)
     suspend fun deleteAllCards(cardList: List<CardWithCashbackDB>)
-    fun getAll():Flow<List<CardWithCashbackDB>>
+    suspend fun getAll():List<CardWithCashbackDB>
 
 
 }

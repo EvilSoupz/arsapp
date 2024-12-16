@@ -43,7 +43,7 @@ interface BankCardDao {
 
     @Transaction
     @Query("SELECT * from bankcard")
-    fun getAll(): Flow<List<CardWithCashbackDB>>
+    suspend fun getAll():List<CardWithCashbackDB>
 //
 //    @Query("SELECT * from bankcard WHERE cashBackItems IN (SELECT * from cashbackitem WHERE type = :type) ")  //??
 //    fun getAllWithType ( type : CashBackTypes2): List<BankCard>

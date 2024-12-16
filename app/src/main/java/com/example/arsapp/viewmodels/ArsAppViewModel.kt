@@ -20,7 +20,6 @@ import com.example.arsapp.idk.CashBackItem
 import com.example.arsapp.idk.CashBackTypes2
 import com.example.arsapp.idk.toBankCard
 import com.example.arsapp.idk.toCardWithCashbackDB
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 
@@ -33,7 +32,7 @@ class ArsAppViewModel(
 //    private val _currentSettings = MutableStateFlow<ArsAppSettings>(initialSettings)
 //    val currentSettings = _currentSettings.asStateFlow()
 
-//    val cardList = mutableListOf(
+    //    val cardList = mutableListOf(
 //        fakeCard, fakeCard, fakeCard, fakeCard
 //    )
 
@@ -45,19 +44,29 @@ class ArsAppViewModel(
 
     suspend fun addCard(bankCard: BankCard) {
         repository.insertCard(bankCard.toCardWithCashbackDB())
+        getCardList()
     }
 
     suspend fun deleteAllCards() {
         repository.deleteAllCards(uiState.cardList.map { it.toCardWithCashbackDB() })
     }
 
-    fun getCardList() {
-        viewModelScope.launch {
+    init {
+        getCardList()
+    }
+
+    private fun getCardList() {
+//        viewModelScope.launch {
 //            val cards = repository.getAll().toList().first().map { it.toBankCard() }
 //            uiState = CardsUiState(cardList = cards, settings = currentSettings)
+//        }
 
-
+        viewModelScope.launch {
+            val cards = repository.getAll().map { it.toBankCard() }
+            uiState= CardsUiState(cardList = cards, settings = currentSettings)
         }
+
+
 
     }
 
@@ -72,6 +81,7 @@ class ArsAppViewModel(
         val oldState = uiState
         currentSettings.cardOrder = order
         uiState = CardsUiState(cardList = oldState.cardList, settings = currentSettings)
+
         //TODO sort Card List
 
     }
@@ -154,9 +164,6 @@ class ArsAppViewModel(
 
     }
 
-    init {
-        getCardList()
-    }
 
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L

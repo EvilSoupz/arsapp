@@ -27,7 +27,7 @@ class OfflineRepository(private val bankCardDao: BankCardDao ) : ArsAppRepositor
     }
 
 
-    override fun getAll(): Flow<List<CardWithCashbackDB>> = bankCardDao.getAll()
+    override suspend fun getAll(): List<CardWithCashbackDB> = bankCardDao.getAll()
 }
 
 

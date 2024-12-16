@@ -20,7 +20,6 @@ fun MyCardMainScreen(
 ) {
 
 //    val currentSettings = arsAppViewModel.currentSettings.collectAsState()
-
     Column {
         MyCardTopBar(
             onOrderClick = { arsAppViewModel.sortCardList(it) },
