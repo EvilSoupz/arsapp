@@ -1,15 +1,16 @@
 package com.example.arsapp.database
 
-import com.example.arsapp.idk.BankCard
+import com.example.arsapp.ArsAppSettings
 import kotlinx.coroutines.flow.Flow
 
 interface ArsAppRepository {
     ///скопировать Dao функции
+    val arsAppSettings : ArsAppSettings
 
 
-    suspend fun insertCard(bankCard: BankCardDB)
-    suspend fun deleteAllCards(cardList: List<BankCardDB>)
-    fun getAll():Flow<List<BankCardDB>>
+    suspend fun insertCard(bankCard: CardWithCashbackDB)
+    suspend fun deleteAllCards(cardList: List<CardWithCashbackDB>)
+    fun getAll():Flow<List<CardWithCashbackDB>>
 
 
 }

@@ -6,13 +6,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Relation
 import com.example.arsapp.idk.CashBackTypes2
-
+import java.util.UUID
 
 
 @Entity(tableName = "bankcard")
 data class CardDB(
-    @PrimaryKey(autoGenerate = true)
-    val cardId: Int = 0,
+    @PrimaryKey
+    val cardId: String,
     @DrawableRes
     val bankImage: Int,
     val bankName: String,
@@ -21,19 +21,18 @@ data class CardDB(
 
 @Entity(tableName = "cashback item")
 data class CashBackItemDB(
-    @PrimaryKey(autoGenerate = true)
-    val itemId: Int = 0,
-    val cardOwnerId: Int,
+    @PrimaryKey
+    val itemId: String = UUID.randomUUID().toString(),
+    val cardOwnerId: String,
     val quantity: Int,
     val type: CashBackTypes2
 )
 
-data class BankCardDB(
+data class CardWithCashbackDB(
     @Embedded
     val cardDB: CardDB,
-    @Relation(parentColumn = "cardId", entityColumn ="cardOwnerId" )
+    @Relation(parentColumn = "cardId", entityColumn = "cardOwnerId")
     val cashbackItems: List<CashBackItemDB>
-
 )
 
 

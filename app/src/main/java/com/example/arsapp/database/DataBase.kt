@@ -5,10 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(version = 1, entities = [CardDB::class, CashBackItemDB::class], exportSchema = false)
+@Database(version = 20, entities = [CardDB::class, CashBackItemDB::class], exportSchema = false)
 abstract class ArsAppDatabase : RoomDatabase() {
     abstract fun bankCardDao(): BankCardDao
-    abstract fun cashbackItemDao(): CashBackItemDao
 
     companion object {
         @Volatile

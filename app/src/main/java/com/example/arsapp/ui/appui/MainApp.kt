@@ -16,17 +16,20 @@ import com.example.arsapp.ui.appui.mycards.MyCardMainScreen
 import com.example.arsapp.ui.appui.settings.SettingsScreen
 import com.example.arsapp.ui.theme.ArsAppTheme
 import com.example.arsapp.viewmodels.ArsAppViewModel
-import com.example.arsapp.viewmodels.ArsAppViewModelFactory
+
 
 
 @RequiresApi(35)
 @Preview
 @Composable
 fun MainApp() {
+
     val navController = rememberNavController()
     val defoltSettings = ArsAppSettings()
-    val arsAppViewModel: ArsAppViewModel =
-        viewModel(factory = ArsAppViewModelFactory(defoltSettings))
+//    val arsAppViewModel: ArsAppViewModel =
+//        viewModel(factory = ArsAppViewModelFactory(defoltSettings))
+
+    val arsAppViewModel : ArsAppViewModel = viewModel(factory = ArsAppViewModel.Factory)
 
 
 
@@ -59,7 +62,7 @@ fun MainApp() {
                 addCArdContent = {
                     AddCardMainScreen(
                         onBackButton = { navController.navigateUp() },
-                        onSaveCardButton = { arsAppViewModel.addCard(it) }
+                        viewModel = arsAppViewModel
                     )
                 },
                 settingsContent = {

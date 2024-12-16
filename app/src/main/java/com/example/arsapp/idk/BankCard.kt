@@ -1,11 +1,12 @@
 package com.example.arsapp.idk
 
 import androidx.annotation.DrawableRes
-import com.example.arsapp.database.BankCardDB
+import com.example.arsapp.database.CardWithCashbackDB
+import com.example.arsapp.database.CardDB
 import com.example.arsapp.database.CashBackItemDB
+import java.util.UUID
 
 data class BankCard(
-    val cardId: Int = 0,
     @DrawableRes
     val bankImage: Int,
     val bankName: String,
@@ -14,12 +15,34 @@ data class BankCard(
 )
 
 data class CashBackItem(
-    val itemId: Int = 0,
     val quantity: Int,
     val type: CashBackTypes2
 )
-fun BankCardDB.toBankCard() = BankCard(
-    cardId = this.cardDB.cardId,
+
+
+fun BankCard.toCardWithCashbackDB(): CardWithCashbackDB{
+    val cardId = UUID.randomUUID().toString()
+   return  CardWithCashbackDB(
+    cardDB = CardDB(
+        cardId = cardId,
+        bankImage = this.bankImage,
+        bankName = this.bankName,
+        cardName = this.cardName
+    ),
+    cashbackItems = this.cashBackItems
+        .map { item ->
+            CashBackItemDB(
+                quantity = item.quantity,
+                cardOwnerId = cardId,
+                type = item.type,
+            )
+        }
+)
+}
+
+
+fun CardWithCashbackDB.toBankCard() = BankCard(
+//    cardId = this.cardDB.cardId,
     bankImage = this.cardDB.bankImage,
     bankName = this.cardDB.bankName,
     cardName = this.cardDB.cardName,
@@ -27,7 +50,7 @@ fun BankCardDB.toBankCard() = BankCard(
 )
 
 fun CashBackItemDB.toCashBackItem() = CashBackItem(
-    itemId = this.itemId,
+//    itemId = this.itemId,
     quantity = this.quantity,
     type = this.type
 )

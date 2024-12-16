@@ -28,7 +28,7 @@ import com.example.arsapp.R
 
 @Composable
 fun CardOrderRow(
-    onOrderClick :(CardOrder)-> Unit
+    onOrderClick: (CardOrder) -> Unit
 
 ) {
 

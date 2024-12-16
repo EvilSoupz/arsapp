@@ -6,23 +6,44 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 
 @Dao
 interface BankCardDao {
-    @Transaction
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(bankCard: CardDB)
 
-    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCard(bankCard: CardDB)
+
     @Delete
-    suspend fun deleteAllCards(cardList : List<CardDB>)
+    suspend fun delete(bankCard: CardDB)
+
+    @Delete
+    suspend fun deleteAllCards(cardList: List<CardDB>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCashbackList(cashbackList: List<CashBackItemDB>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCArdWithCashBack(card: CardDB , cashbackList: List<CashBackItemDB>)
+
+
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertCArdWithCashBack2(card: CardWithCashbackDB)
+
+    @Delete
+    suspend fun delete(item: CashBackItemDB)
+    @Delete
+    suspend fun delete(items: List<CashBackItemDB>)
+
+    @Update
+    suspend fun update(item: CashBackItemDB)
 
 
     @Transaction
     @Query("SELECT * from bankcard")
-    fun getAll() : Flow<List<BankCardDB>>
+    fun getAll(): Flow<List<CardWithCashbackDB>>
 //
 //    @Query("SELECT * from bankcard WHERE cashBackItems IN (SELECT * from cashbackitem WHERE type = :type) ")  //??
 //    fun getAllWithType ( type : CashBackTypes2): List<BankCard>
