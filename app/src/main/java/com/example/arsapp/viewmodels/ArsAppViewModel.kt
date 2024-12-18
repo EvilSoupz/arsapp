@@ -1,8 +1,5 @@
 package com.example.arsapp.viewmodels
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -20,7 +17,12 @@ import com.example.arsapp.idk.CashBackItem
 import com.example.arsapp.idk.CashBackTypes2
 import com.example.arsapp.idk.toBankCard
 import com.example.arsapp.idk.toCardWithCashbackDB
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 
 
 class ArsAppViewModel(
@@ -28,129 +30,65 @@ class ArsAppViewModel(
 ) : ViewModel() {
 
 
-//
-//    private val _currentSettings = MutableStateFlow<ArsAppSettings>(initialSettings)
-//    val currentSettings = _currentSettings.asStateFlow()
+    private val _currentSettings = MutableStateFlow<ArsAppSettings>(repository.arsAppSettings)
+    val currentSettings = _currentSettings.asStateFlow()
 
-    //    val cardList = mutableListOf(
-//        fakeCard, fakeCard, fakeCard, fakeCard
-//    )
+    val cardListState = repository.getAll().map { cards ->
+        CardsUiState(cardList = cards.map { it.toBankCard() })
 
-
-    private var currentSettings = repository.arsAppSettings
-    var uiState by mutableStateOf(CardsUiState())
-        private set
-
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+        initialValue = CardsUiState()
+    )
 
     suspend fun addCard(bankCard: BankCard) {
         repository.insertCard(bankCard.toCardWithCashbackDB())
-        getCardList()
     }
 
     suspend fun deleteAllCards() {
-        repository.deleteAllCards(uiState.cardList.map { it.toCardWithCashbackDB() })
+        repository.deleteAllCards(cardListState.value.cardList.map { it.toCardWithCashbackDB() })
     }
-
-    init {
-        getCardList()
-    }
-
-    private fun getCardList() {
-//        viewModelScope.launch {
-//            val cards = repository.getAll().toList().first().map { it.toBankCard() }
-//            uiState = CardsUiState(cardList = cards, settings = currentSettings)
-//        }
-
-        viewModelScope.launch {
-            val cards = repository.getAll().map { it.toBankCard() }
-            uiState= CardsUiState(cardList = cards, settings = currentSettings)
+    fun sortCardList(order: CardOrder) {
+        _currentSettings.update {
+            it.copy(
+                cardOrder = order
+            )
         }
 
 
-
-    }
-
-    fun sortCardList(order: CardOrder) {
-//        _currentSettings.update {
-//            it.copy(
-//                cardOrder = order
-//            )
-//        }
-
-//        uiState.settings.cardOrder = order
-        val oldState = uiState
-        currentSettings.cardOrder = order
-        uiState = CardsUiState(cardList = oldState.cardList, settings = currentSettings)
 
         //TODO sort Card List
 
     }
 
     fun changeSelectedCashBackType(type: CashBackTypes2) {
-//        _currentSettings.update {
-//            it.copy(
-//                selectedCashBackType = type
-//            )
-//        }
-//        uiState.settings.selectedCashBackType = type
-        val oldState = uiState
-        currentSettings.selectedCashBackType = type
-        uiState = CardsUiState(cardList = oldState.cardList, settings = currentSettings)
+        _currentSettings.update {
+            it.copy(
+                selectedCashBackType = type
+            )
+        }
     }
 
     fun changeLayoutToOneColumn() {
-//        _currentSettings.update {
-//            it.copy(
-//                isGridLayout = false
-//            )
-//        }
-//        uiState.settings.isGridLayout = false
-        val oldState = uiState
-        currentSettings.isGridLayout = false
-        uiState = CardsUiState(cardList = oldState.cardList, settings = currentSettings)
+        _currentSettings.update {
+            it.copy(
+                isGridLayout = false
+            )
+        }
     }
 
     fun changeLayoutToTwoColumn() {
-//        _currentSettings.update {
-//            it.copy(
-//                isGridLayout = true
-//            )
-//        }
-//        uiState.settings.isGridLayout = true
-        val oldState = uiState
-        currentSettings.isGridLayout = true
-        uiState = CardsUiState(cardList = oldState.cardList, settings = currentSettings)
+        _currentSettings.update {
+            it.copy(
+                isGridLayout = true
+            )
+        }
+
     }
 
     fun changeNotificationState(notification: Notification) {
-//        val newList = _currentSettings.value.notificationList.apply {
-//            replaceAll {
-//                if (it == notification) {
-//
-//                    it.copy(isActive = !it.isActive)
-//                } else {
-//                    it
-//                }
-//            }
-//        }
-//        _currentSettings.update { settings ->
-//            settings.copy(notificationList = newList)
-//        }
-
-        //////////////////////////////////////////////////
-//        uiState.settings.notificationList.apply {
-//            replaceAll {
-//                if (it == notification) {
-//
-//                    it.copy(isActive = !it.isActive)
-//                } else {
-//                    it
-//                }
-//            }
-//        }
-
-        val oldState = uiState
-        currentSettings.notificationList.apply {
+        val newList = _currentSettings.value.notificationList.apply {
             replaceAll {
                 if (it == notification) {
 
@@ -159,11 +97,11 @@ class ArsAppViewModel(
                     it
                 }
             }
-            uiState = CardsUiState(cardList = oldState.cardList, settings = currentSettings)
         }
-
+        _currentSettings.update { settings ->
+            settings.copy(notificationList = newList)
+        }
     }
-
 
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L
@@ -180,7 +118,7 @@ class ArsAppViewModel(
 
 data class CardsUiState(
     val cardList: List<BankCard> = listOf(),
-    val settings: ArsAppSettings = ArsAppSettings()
+//    val settings: ArsAppSettings = ArsAppSettings()
 )
 
 

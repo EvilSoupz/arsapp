@@ -5,12 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArsAppRepository {
     ///скопировать Dao функции
-    val arsAppSettings : ArsAppSettings
+    val arsAppSettings: ArsAppSettings
 
 
     suspend fun insertCard(bankCard: CardWithCashbackDB)
     suspend fun deleteAllCards(cardList: List<CardWithCashbackDB>)
-    suspend fun getAll():List<CardWithCashbackDB>
-
-
+    fun getAll(): Flow<List<CardWithCashbackDB>>
 }

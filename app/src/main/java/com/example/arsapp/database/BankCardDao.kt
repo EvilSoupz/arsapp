@@ -26,25 +26,18 @@ interface BankCardDao {
     suspend fun insertCashbackList(cashbackList: List<CashBackItemDB>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCArdWithCashBack(card: CardDB , cashbackList: List<CashBackItemDB>)
-
-
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertCArdWithCashBack2(card: CardWithCashbackDB)
+    suspend fun insertCArdWithCashBack(card: CardDB, cashbackList: List<CashBackItemDB>)
 
     @Delete
     suspend fun delete(item: CashBackItemDB)
+
     @Delete
     suspend fun delete(items: List<CashBackItemDB>)
 
     @Update
     suspend fun update(item: CashBackItemDB)
 
-
     @Transaction
     @Query("SELECT * from bankcard")
-    suspend fun getAll():List<CardWithCashbackDB>
-//
-//    @Query("SELECT * from bankcard WHERE cashBackItems IN (SELECT * from cashbackitem WHERE type = :type) ")  //??
-//    fun getAllWithType ( type : CashBackTypes2): List<BankCard>
+    fun getAll(): Flow<List<CardWithCashbackDB>>
 }

@@ -17,18 +17,12 @@ import kotlinx.coroutines.launch
 @RequiresApi(35)
 @Composable
 fun SettingsScreen(
-
-
     arsAppViewModel: ArsAppViewModel,
     onBackButton: () -> Unit,
-
-
     modifier: Modifier = Modifier
 ) {
-
-//    val currentSettings = arsAppViewModel.currentSettings.collectAsState()
+    val currentSettings = arsAppViewModel.currentSettings.collectAsState()
     val coroutineScope = rememberCoroutineScope()
-
 
     Column {
         SettingsTopBar(
@@ -42,8 +36,7 @@ fun SettingsScreen(
             DisplayCardsRow(
                 onOneInColumnClick = { arsAppViewModel.changeLayoutToOneColumn() },
                 onTwoInColumnClick = { arsAppViewModel.changeLayoutToTwoColumn() },
-                isGridLayout = arsAppViewModel.uiState.settings.isGridLayout
-//                isGridLayout = currentSettings.value.isGridLayout
+                isGridLayout = currentSettings.value.isGridLayout
 
             )
             Spacer(modifier = Modifier.height(40.dp))
@@ -52,8 +45,7 @@ fun SettingsScreen(
             )
             Spacer(modifier = Modifier.height(40.dp))
             NotificationRow(
-                arsAppViewModel.uiState.settings.notificationList,
-//                currentSettings.value.notificationList,
+                currentSettings.value.notificationList,
                 onNotificationChange = { arsAppViewModel.changeNotificationState(it) }
             )
             Spacer(modifier = Modifier.height(40.dp))
@@ -61,7 +53,6 @@ fun SettingsScreen(
                 coroutineScope.launch {
                     arsAppViewModel.deleteAllCards()
                 }
-
             })
         }
     }
