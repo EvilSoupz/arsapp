@@ -122,44 +122,7 @@ data class CardsUiState(
 )
 
 
-val fakeCard = BankCard(
-    bankImage = R.drawable.ic_launcher_foreground,
-    bankName = "BankName",
-    cardName = "CardType",
-    cashBackItems = listOf(
-        CashBackItem(
 
-            type = CashBackTypes2.Food,
-            quantity = 1
-        ),
-        CashBackItem(
-
-            type = CashBackTypes2.Fuel,
-            quantity = 2
-        ),
-        CashBackItem(
-
-            type = CashBackTypes2.Health,
-            quantity = 3
-        ),
-        CashBackItem(
-
-            type = CashBackTypes2.Entertainment,
-            quantity = 4
-        ),
-//        CashBackItem(
-//
-//            type = CashBackTypes2.Food,
-//            quantity = 5
-//        ),
-//        CashBackItem(
-//
-//            name = "CashBackItem",
-//            quantity = 6
-//        ),
-
-    )
-)
 
 
 

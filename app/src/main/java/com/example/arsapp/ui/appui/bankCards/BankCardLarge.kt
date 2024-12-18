@@ -22,8 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.arsapp.R
 import com.example.arsapp.idk.BankCard
-import com.example.arsapp.viewmodels.fakeCard
+import com.example.arsapp.idk.CashBackItem
+import com.example.arsapp.idk.CashBackTypes2
 
 @Composable
 fun BankCardLarge(
@@ -64,7 +66,6 @@ fun BankCardLarge(
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
             ) {
@@ -81,14 +82,11 @@ fun BankCardLarge(
                     } else {
                         Spacer(
                             modifier = Modifier
-
                         )
                     }
                     if (bankCard.cashBackItems.size > 2) {
                         CashBackItemLarge(
                             item = bankCard.cashBackItems[2],
-
-
                             )
                     } else {
                         Spacer(
@@ -99,17 +97,12 @@ fun BankCardLarge(
                     if (bankCard.cashBackItems.size > 4) {
                         CashBackItemLarge(
                             item = bankCard.cashBackItems[4],
-
-
                             )
                     } else {
                         Spacer(
                             modifier = Modifier
-
                         )
                     }
-
-
                 }
                 Spacer(modifier = Modifier.width(12.dp))
 
@@ -120,50 +113,35 @@ fun BankCardLarge(
                     if (bankCard.cashBackItems.size > 1) {
                         CashBackItemLarge(
                             item = bankCard.cashBackItems[1],
-
-
                             )
                     } else {
                         Spacer(
                             modifier = Modifier
-
                         )
                     }
                     if (bankCard.cashBackItems.size > 3) {
                         CashBackItemLarge(
                             item = bankCard.cashBackItems[3],
-
-
                             )
                     } else {
                         Spacer(
                             modifier = Modifier
-
                         )
                     }
                     if (bankCard.cashBackItems.size > 5) {
                         CashBackItemLarge(
                             item = bankCard.cashBackItems[5],
-
-
                             )
                     } else {
                         Spacer(
                             modifier = Modifier
-
                         )
                     }
-
                 }
-
             }
         }
-
-
     }
-
 }
-
 
 @Preview
 @Composable
@@ -171,7 +149,29 @@ fun LargeCardPreview() {
     BankCardLarge(bankCard = fakeCard)
 }
 
-
+val fakeCard = BankCard(
+    bankImage = R.drawable.ic_launcher_foreground,
+    bankName = "BankName",
+    cardName = "CardType",
+    cashBackItems = listOf(
+        CashBackItem(
+            type = CashBackTypes2.Food,
+            quantity = 1
+        ),
+        CashBackItem(
+            type = CashBackTypes2.Fuel,
+            quantity = 2
+        ),
+        CashBackItem(
+            type = CashBackTypes2.Health,
+            quantity = 3
+        ),
+        CashBackItem(
+            type = CashBackTypes2.Entertainment,
+            quantity = 4
+        ),
+    )
+)
 
 
 

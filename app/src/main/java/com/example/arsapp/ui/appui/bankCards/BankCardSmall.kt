@@ -22,21 +22,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.arsapp.idk.BankCard
-import com.example.arsapp.viewmodels.fakeCard
 
 
-/// баг с размером пустого cashBackItemSmall
 @Composable
 fun BankCardSmall(
     bankCard: BankCard
 ) {
-
     Card(
         modifier = Modifier,
         shape = RoundedCornerShape(18.dp),
         border = BorderStroke(color = Color.LightGray, width = 1.dp)
-
-        ) {
+    ) {
         Column(
             modifier = Modifier
                 .padding(10.dp)
@@ -53,21 +49,21 @@ fun BankCardSmall(
                 Column {
                     Text(
                         fontSize = 16.sp,
-                        text = bankCard.bankName)
+                        text = bankCard.bankName
+                    )
                     Text(
                         fontSize = 16.sp,
-                        text = bankCard.cardName)
+                        text = bankCard.cardName
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Column(
             ) {
-
                 Row {
                     if (bankCard.cashBackItems.size > 3) {
                         CashBackItemSmall(
                             item = bankCard.cashBackItems[3]
-
                         )
                     } else {
                         Spacer(
@@ -76,12 +72,10 @@ fun BankCardSmall(
                                 .height(24.dp)
                         )
                     }
-
                     Spacer(modifier = Modifier.width(6.dp))
                     if (bankCard.cashBackItems.size > 4) {
                         CashBackItemSmall(
                             item = bankCard.cashBackItems[4]
-
                         )
                     } else {
                         Spacer(
@@ -94,7 +88,6 @@ fun BankCardSmall(
                     if (bankCard.cashBackItems.size > 5) {
                         CashBackItemSmall(
                             item = bankCard.cashBackItems[5]
-
                         )
                     } else {
                         Spacer(
@@ -103,15 +96,12 @@ fun BankCardSmall(
                                 .height(24.dp)
                         )
                     }
-
                 }
                 Spacer(modifier = Modifier.height(6.dp))
                 Row {
-
                     if (bankCard.cashBackItems.isNotEmpty()) {
                         CashBackItemSmall(
                             item = bankCard.cashBackItems[0]
-
                         )
                     } else {
                         Spacer(
@@ -120,12 +110,10 @@ fun BankCardSmall(
                                 .height(24.dp)
                         )
                     }
-
                     Spacer(modifier = Modifier.width(6.dp))
                     if (bankCard.cashBackItems.size > 1) {
                         CashBackItemSmall(
                             item = bankCard.cashBackItems[1]
-
                         )
                     } else {
                         Spacer(
@@ -138,7 +126,6 @@ fun BankCardSmall(
                     if (bankCard.cashBackItems.size > 2) {
                         CashBackItemSmall(
                             item = bankCard.cashBackItems[2]
-
                         )
                     } else {
                         Spacer(
@@ -147,18 +134,11 @@ fun BankCardSmall(
                                 .height(24.dp)
                         )
                     }
-
-
                 }
-
-
             }
-
         }
-
     }
 }
-
 
 @Preview
 @Composable
