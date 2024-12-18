@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,14 +26,17 @@ import com.example.arsapp.idk.BankCard
 import com.example.arsapp.idk.CashBackItem
 import com.example.arsapp.idk.CashBackTypes2
 import com.example.arsapp.ui.appui.settings.SettingsTopBar
+import com.example.arsapp.viewmodels.ArsAppViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AddCardMainScreen(
     onBackButton: () -> Unit,
-    onSaveCardButton: (BankCard) -> Unit
+     viewModel: ArsAppViewModel
 ) {
 
 
+    val coroutinesCope = rememberCoroutineScope()
     var cardName by remember { mutableStateOf("") }
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -62,20 +66,24 @@ fun AddCardMainScreen(
             Spacer(modifier = Modifier.height(40.dp))
             Button(
                 onClick = {
-                    onSaveCardButton(
-                        BankCard(
-                            cardName = cardName,
-                            bankName = "addBankName",
-                            bankImage = R.drawable.settings,
-                            cashBackItems = listOf(
-                                CashBackItem(
+                  coroutinesCope.launch {
+                      viewModel.addCard(
+                          BankCard(
+                              cardName = cardName,
+                              bankName = "addBankName",
+                              bankImage = R.drawable.settings,
+                              cashBackItems = listOf(
+                                  CashBackItem(
+                                      quantity = 99,
+                                      type = CashBackTypes2.Entertainment
+                                  )
+                              ),
 
-                                    quantity = 99,
-                                    type = CashBackTypes2.Entertainment
-                                )
-                            )
-                        )
-                    )
+                          )
+                      )
+                  }
+
+
                     onBackButton()
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -96,13 +104,4 @@ fun BankChoseRow() {
 
 @Composable
 fun AddCashBackCategory() {
-}
-
-@Preview
-@Composable
-fun AddCardPreview() {
-    AddCardMainScreen(
-        onBackButton = {},
-        onSaveCardButton = {}
-    )
 }

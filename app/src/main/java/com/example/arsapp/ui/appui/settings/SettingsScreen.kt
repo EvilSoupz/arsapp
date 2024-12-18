@@ -8,24 +8,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.arsapp.viewmodels.ArsAppViewModel
+import kotlinx.coroutines.launch
 
 @RequiresApi(35)
 @Composable
 fun SettingsScreen(
-
-
     arsAppViewModel: ArsAppViewModel,
-    onBackButton : ()->Unit,
-
-
+    onBackButton: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     val currentSettings = arsAppViewModel.currentSettings.collectAsState()
-
+    val coroutineScope = rememberCoroutineScope()
 
     Column {
         SettingsTopBar(
@@ -49,16 +46,17 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(40.dp))
             NotificationRow(
                 currentSettings.value.notificationList,
-                onNotificationChange = { arsAppViewModel.changeNotificationState(it)   }
+                onNotificationChange = { arsAppViewModel.changeNotificationState(it) }
             )
             Spacer(modifier = Modifier.height(40.dp))
-            ResetCardButton(onResetCardButton = { arsAppViewModel.resetCardList() })
+            ResetCardButton(onResetCardButton = {
+                coroutineScope.launch {
+                    arsAppViewModel.deleteAllCards()
+                }
+            })
         }
     }
 }
-
-
-
 
 
 //@Preview
