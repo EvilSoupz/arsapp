@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -53,9 +54,9 @@ fun BottomBar(
 //                )
 //            })
 //
-        Divider(
-            color = Color.Gray,
-            thickness = 1.dp
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = Color.Gray
         )
         Row(
             modifier = Modifier

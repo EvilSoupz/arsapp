@@ -19,7 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.arsapp.R
 import com.example.arsapp.idk.BankCard
@@ -32,12 +31,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun AddCardMainScreen(
     onBackButton: () -> Unit,
-     viewModel: ArsAppViewModel
+    viewModel: ArsAppViewModel
 ) {
-
-
     val coroutinesCope = rememberCoroutineScope()
     var cardName by remember { mutableStateOf("") }
+    val itemList = remember { mutableListOf<CashBackItem>(CashBackItem(quantity = 5 , type = CashBackTypes2.Fuel)) }
+//    val itemList = remember { mutableListOf<CashBackItem>() }
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -62,28 +61,23 @@ fun AddCardMainScreen(
             Spacer(modifier = Modifier.height(22.dp))
             BankChoseRow()
             Spacer(modifier = Modifier.height(40.dp))
-            AddCashBackCategory()
+            CashbackCategories(
+                itemList,
+                onAddCategoryClick = {}
+            )
             Spacer(modifier = Modifier.height(40.dp))
             Button(
                 onClick = {
-                  coroutinesCope.launch {
-                      viewModel.addCard(
-                          BankCard(
-                              cardName = cardName,
-                              bankName = "addBankName",
-                              bankImage = R.drawable.settings,
-                              cashBackItems = listOf(
-                                  CashBackItem(
-                                      quantity = 99,
-                                      type = CashBackTypes2.Entertainment
-                                  )
-                              ),
-
-                          )
-                      )
-                  }
-
-
+                    coroutinesCope.launch {
+                        viewModel.addCard(
+                            BankCard(
+                                cardName = cardName,
+                                bankName = "addBankName",
+                                bankImage = R.drawable.settings,
+                                cashBackItems = itemList
+                            )
+                        )
+                    }
                     onBackButton()
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -102,6 +96,3 @@ fun AddCardMainScreen(
 fun BankChoseRow() {
 }
 
-@Composable
-fun AddCashBackCategory() {
-}

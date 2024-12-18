@@ -14,4 +14,6 @@
     <string name="add_card">Добавление Карты</string>
     <string name="card_name">Название карты</string>
     <string name="save_card">Сохранить карту</string>
+    <string name="cashback_text">Кэшбэк</string>
+    <string name="add_category_text">Добавить категорию</string>
 </resources>
