@@ -9,11 +9,9 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.arsapp.ArsAppApplication
 import com.example.arsapp.ArsAppSettings
 import com.example.arsapp.Notification
-import com.example.arsapp.R
 import com.example.arsapp.database.ArsAppRepository
 import com.example.arsapp.idk.BankCard
 import com.example.arsapp.idk.CardOrder
-import com.example.arsapp.idk.CashBackItem
 import com.example.arsapp.idk.CashBackTypes2
 import com.example.arsapp.idk.toBankCard
 import com.example.arsapp.idk.toCardWithCashbackDB
