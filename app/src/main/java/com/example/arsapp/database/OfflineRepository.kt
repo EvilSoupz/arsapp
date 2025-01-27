@@ -1,6 +1,7 @@
 package com.example.arsapp.database
 
 import com.example.arsapp.ArsAppSettings
+import com.example.arsapp.idk.CashBackTypes2
 import kotlinx.coroutines.flow.Flow
 
 class OfflineRepository(private val bankCardDao: BankCardDao) : ArsAppRepository {
@@ -27,6 +28,10 @@ class OfflineRepository(private val bankCardDao: BankCardDao) : ArsAppRepository
 
 
     override fun getAll(): Flow<List<CardWithCashbackDB>> = bankCardDao.getAll()
+
+
+    override fun getByCBType(type: CashBackTypes2): Flow<List<CardWithCashbackDB>> =
+        bankCardDao.getByCBType(type)
+
+
 }
-
-

@@ -17,6 +17,7 @@ import com.example.arsapp.idk.toBankCard
 import com.example.arsapp.idk.toCardWithCashbackDB
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -31,7 +32,7 @@ class ArsAppViewModel(
     private val _currentSettings = MutableStateFlow<ArsAppSettings>(repository.arsAppSettings)
     val currentSettings = _currentSettings.asStateFlow()
 
-    val cardListState = repository.getAll().map { cards ->
+    var cardListState = repository.getAll().map { cards ->
         CardsUiState(cardList = cards.map { it.toBankCard() })
 
     }.stateIn(
@@ -39,6 +40,7 @@ class ArsAppViewModel(
         started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
         initialValue = CardsUiState()
     )
+        private set
 
     suspend fun addCard(bankCard: BankCard) {
         repository.insertCard(bankCard.toCardWithCashbackDB())
@@ -47,13 +49,13 @@ class ArsAppViewModel(
     suspend fun deleteAllCards() {
         repository.deleteAllCards(cardListState.value.cardList.map { it.toCardWithCashbackDB() })
     }
+
     fun sortCardList(order: CardOrder) {
         _currentSettings.update {
             it.copy(
                 cardOrder = order
             )
         }
-
 
 
         //TODO sort Card List
@@ -66,6 +68,27 @@ class ArsAppViewModel(
                 selectedCashBackType = type
             )
         }
+        if (type != CashBackTypes2.All) {
+            cardListState = repository.getByCBType(type).map { cards ->
+                CardsUiState(cardList = cards.map { it.toBankCard() })
+            }.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+                initialValue = CardsUiState()
+            )
+
+        } else {
+            cardListState = repository.getAll().map { cards ->
+                CardsUiState(cardList = cards.map { it.toBankCard() })
+
+            }.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+                initialValue = CardsUiState()
+            )
+        }
+
+
     }
 
     fun changeLayoutToOneColumn() {

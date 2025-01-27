@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.example.arsapp.idk.CashBackTypes2
 import kotlinx.coroutines.flow.Flow
 
 
@@ -40,4 +41,8 @@ interface BankCardDao {
     @Transaction
     @Query("SELECT * from bankcard")
     fun getAll(): Flow<List<CardWithCashbackDB>>
+
+    @Transaction
+    @Query("select * from bankcard where cardId in (select cardOwnerId from `cashback item` where type= :type)")
+    fun getByCBType(type : CashBackTypes2): Flow<List<CardWithCashbackDB>>
 }
